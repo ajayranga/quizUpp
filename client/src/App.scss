@@ -1,0 +1,114 @@
+.stepsWrapper {
+  div {
+    background-color: var(--bs-info);
+    position: relative;
+    cursor: pointer;
+    &:not(:last-child) {
+      &::after {
+        content: '';
+        position: absolute;
+        right: -0.94rem;
+        width: 0;
+        height: 0;
+        border-top: 18px solid transparent;
+        border-bottom: 18px solid transparent;
+        border-left: 18px solid var(--bs-info);
+      }
+    }
+    &:not(:first-child) {
+      span {
+        margin-left: 1rem;
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0rem;
+        width: 0;
+        height: 0;
+        border-top: 18px solid transparent;
+        border-bottom: 18px solid transparent;
+        border-left: 15px solid var(--bs-white);
+      }
+    }
+  }
+  .inactive {
+    cursor: not-allowed;
+    background-color: var(--bs-gray-300);
+    &:not(:last-child) {
+      &::after {
+        border-left: 18px solid var(--bs-gray-300);
+      }
+    }
+  }
+}
+
+.questionsList {
+  .question {
+    .option {
+      cursor: pointer;
+      &:hover {
+        background-color: var(--bs-gray-300);
+      }
+    }
+    .read-only {
+      cursor: not-allowed;
+      &:hover {
+        background-color: unset;
+      }
+    }
+  }
+}
+
+.capital-first-letter {
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
+.timerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.allQuestionButtonsContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.ticking-clock {
+  animation: tick 0.4s infinite;
+}
+@keyframes tick {
+  0% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(-1px, 0);
+  }
+  50% {
+    transform: translate(0);
+  }
+  75% {
+    transform: translate(1px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.width-max-content {
+  width: max-content;
+}
+
+.carousel {
+  background: black;
+  .carousel-inner {
+    .carousel-item {
+      img {
+        opacity: 0.6;
+        height: 15rem;
+      }
+    }
+  }
+}

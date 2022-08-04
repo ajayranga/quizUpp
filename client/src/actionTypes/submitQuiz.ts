@@ -1,0 +1,6 @@
+// submit quiz const
+export const QUIZ_SUBMIT = 'QUIZ_SUBMIT';
+export const QUIZ_SUBMIT_LOADING = 'QUIZ_SUBMIT_LOADING';
+export const QUIZ_SUBMIT_FAILED = 'QUIZ_SUBMIT_FAILED';
+export const QUIZ_SUBMIT_SUCCESS = 'QUIZ_SUBMIT_SUCCESS';
+export const QUIZ_SUBMIT_CLEAR = 'QUIZ_SUBMIT_CLEAR';

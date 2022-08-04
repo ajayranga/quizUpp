@@ -1,0 +1,40 @@
+{
+  "name": "quiz",
+  "version": "1.0.0",
+  "main": "/backend/server.ts",
+  "author": "Ajay <ajay.ranga.mr.unique@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installDep": "npm install && npm install --prefix client",
+    "data:import": "ts-node backend/seeder",
+    "data:destroy": "ts-node backend/seeder -d",
+    "frontend": "npm run start --prefix client",
+    "build-frontend": "npm run build --prefix client",
+    "backend": "ts-node-dev --cls --respawn backend/server --ignore /client/*",
+    "dev": "NODE_ENV=development concurrently -n \"backend,frontend\" -c \"red,yellow\" \"npm run backend\" \"npm run frontend\"",
+    "start": "npm run build-frontend && NODE_ENV=production ts-node backend/server",
+    "startServer": "NODE_ENV=production ts-node backend/server"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/morgan": "^1.9.3",
+    "@types/multer": "^1.4.7",
+    "@types/node": "^18.0.3",
+    "concurrently": "^7.2.2",
+    "dotenv": "^16.0.1",
+    "express-rate-limit": "^6.4.0",
+    "ts-node": "^10.8.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^6.4.4",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1"
+  }
+}
