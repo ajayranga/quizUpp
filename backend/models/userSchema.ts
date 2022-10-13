@@ -52,7 +52,7 @@ const UserSchema = new mongoose.Schema<IUser>(
       type: String,
       trim: true,
       lowercase: true,
-      unique: true,
+      // unique: true,
       required: [true, 'Document Number is required'],
     },
     email: {

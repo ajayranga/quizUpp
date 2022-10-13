@@ -5,7 +5,7 @@ import { upload } from '../controllers/uploadController';
 
 Router.post('/', upload.single('image'), (req: Request, res: Response) => {
   console.log('Uploading Image');
-  res.send(`/${req.file?.path}`);
+  res.json({ imageUrl: req.file!.path });
 });
 
 export default Router;

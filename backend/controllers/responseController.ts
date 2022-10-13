@@ -52,7 +52,7 @@ export const submitResponse = asyncHandler(
           responses,
         });
         var userData = await newUser.save();
-        res.status(201).json(userData);
+        res.status(201).json({ userData });
       } else {
         res.status(400);
         throw new Error('Some User details are missing');

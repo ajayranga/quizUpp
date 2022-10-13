@@ -7,7 +7,9 @@ export const getAllQuestion = asyncHandler(
     try {
       const allQuestions = await Question.find();
 
-      res.status(201).json(shuffleArray(allQuestions).slice(0, 20));
+      res
+        .status(201)
+        .json({ questions: shuffleArray(allQuestions).slice(0, 20) });
     } catch (error: any) {
       console.log(error);
       res.status(404);

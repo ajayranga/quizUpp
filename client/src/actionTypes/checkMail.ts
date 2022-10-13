@@ -1,6 +1,0 @@
-//check email const
-export const CHECK_MAIL = 'CHECK_MAIL';
-export const CHECK_MAIL_LOADING = 'CHECK_MAIL_LOADING';
-export const CHECK_MAIL_FAILED = 'CHECK_MAIL_FAILED';
-export const CHECK_MAIL_SUCCESS = 'CHECK_MAIL_SUCCESS';
-export const CHECK_MAIL_CLEAR = 'CHECK_MAIL_CLEAR';
