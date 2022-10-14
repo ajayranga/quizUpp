@@ -10,30 +10,27 @@ export const initialState: AllResponsesState = {
   success: false,
 };
 
-interface argIntf extends ResponseState {
-  allResponses: ResponseState[];
-}
+// interface argIntf extends ResponseState {
+//   allResponses: ResponseState[];
+// }
 const allResponsesSlice = createSlice({
   name: 'allResponses',
   initialState,
   reducers: {
-    submit(state, action: PayloadAction<argIntf>) {
-      const responsesFromState = action.payload.allResponses;
-      var result = [];
-      const data = { qId: action.payload.qId, answer: action.payload.answer };
-      responsesFromState.length !== 0
-        ? responsesFromState.forEach((itm: ResponseState) => {
-            if (itm.qId === data.qId) result.push(data);
-            else {
-              result.push(itm, data);
-            }
-          })
-        : result.push(data);
-      result = result.filter(
-        (itm: ResponseState, index: number, arr: ResponseState[]) =>
-          arr.findIndex((itm2: any) => itm2.qId === itm.qId) === index
-      );
-      state.responses = result;
+    submit(state, action: PayloadAction<ResponseState>) {
+      const qIdAr = state.responses.map((itm) => itm.qId);
+      if (
+        state.responses.length === 0 ||
+        qIdAr.indexOf(action.payload.qId) === -1
+      )
+        state.responses.push(action.payload);
+      else
+        state.responses.forEach(
+          (resp: ResponseState, index: number) =>
+            resp.qId === action.payload.qId &&
+            (state.responses[index] = action.payload)
+        );
+
       state.error = null;
       state.loading = false;
       state.success = true;

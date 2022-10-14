@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Meta from 'app/components/Meta';
 import Loader from 'app/components/Loader';
 import Message, { TContainer } from 'app/components/Message';
-import QuizSteps from 'app/components/QuizSteps';
-import Question from 'app/components/Question';
+import QuizSteps from 'app/components/QuizSteps/loadable';
+import Question from 'app/components/Question/loadable';
 
 import { UseAllQuestionsSlice } from './Features/Questions/slice';
 import { UseTimerSlice } from './Features/Timer/slice';
@@ -66,7 +66,8 @@ function Quiz() {
     if (Object.keys(userInfo).length === 0)
       navigate('/step1', { replace: true });
     setCounter(time);
-  }, []); // eslint-disable-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate, userInfo]);
 
   useEffect(() => {
     if (time === 0) navigate('/step3');
@@ -123,13 +124,11 @@ function Quiz() {
               <Question
                 questionData={allQuestions[currentQuestion]}
                 index={currentQuestion + 1}
-                key={currentQuestion}
                 response={allResponses.find(
                   (que: ResponseState) =>
                     que.qId === allQuestions[currentQuestion]._id
                 )}
-                allResponses={allResponses}
-                readOnly={false}
+                key={currentQuestion}
               />
             )}
             <h4>Go To Question</h4>

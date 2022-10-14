@@ -17,34 +17,6 @@ type Props = {};
 const AdminAllResponses = (props: Props) => {
   const dispatch = useDispatch();
   const { actions: ResponseForAdminActions } = UseResponseForAdminSlice();
-  // interface RootState {
-  // credentials: {
-  //   userInfo: any;
-  //   loading: boolean;
-  // };
-  // uploadImage: {
-  //   imageUrl: string;
-  //   loading: boolean;
-  //   error: any;
-  //   success: boolean;
-  // };
-  // submitQuiz: {
-  //   success: boolean;
-  //   loading: boolean;
-  //   error: any;
-  // };
-  // adminAllResponses: {
-  //   allResponses: [any];
-  //   pages: number;
-  //   pageSize: number;
-  //   pageNumber: number;
-  //   success: boolean;
-  //   loading: boolean;
-  //   error: any;
-  // }
-
-  // const { allResponses, pages, pageSize, pageNumber, loading, error } =
-  //   useSelector((state: RootState) => state.adminAllResponses);
   const pageNumber = useSelector(selectPageNumber);
   const pages = useSelector(selectPages);
   const allResponses = useSelector(selectAllResponses);

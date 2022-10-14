@@ -1,6 +1,6 @@
-import React from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { Navbar, Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -8,10 +8,10 @@ const NavBar = () => {
     <Navbar collapseOnSelect bg="light" variant="light">
       <Container>
         <Navbar.Brand
-          onClick={() => navigate("/")}
-          style={{ cursor: "pointer" }}
+          onClick={() => navigate('/')}
+          style={{ cursor: 'pointer' }}
         >
-          Home Depot
+          Quiz Upp
         </Navbar.Brand>
         {/* <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>

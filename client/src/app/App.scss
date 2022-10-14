@@ -64,7 +64,12 @@
     text-transform: capitalize;
   }
 }
-
+.strikethrough {
+  text-decoration: line-through;
+}
+.not-strikethrough {
+  text-decoration: none;
+}
 .timerContainer {
   display: flex;
   justify-content: space-between;

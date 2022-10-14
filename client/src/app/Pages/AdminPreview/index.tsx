@@ -40,7 +40,7 @@ const AdminPreview = (props: Props) => {
       </h2>
       <Link to="/admin">Go back</Link>
       <ListGroup className="questionsList">
-        {/* {questions &&
+        {questions &&
           questions.map((question: any, index: number) => (
             <Question
               questionData={question}
@@ -55,7 +55,7 @@ const AdminPreview = (props: Props) => {
               readOnly={true}
               adminPreview
             />
-          ))} */}
+          ))}
       </ListGroup>
     </Container>
   );
