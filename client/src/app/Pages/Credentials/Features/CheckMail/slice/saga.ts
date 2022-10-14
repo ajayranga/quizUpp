@@ -24,11 +24,6 @@ const checkMail = function* (action: PayloadAction<string>) {
   }
 };
 
-const reset = function* (action: PayloadAction) {
-  yield put(actions.reset());
-};
-
 export const checkMailSaga = function* () {
   yield takeLatest(actions.checkMailStart.type, checkMail);
-  yield takeLatest(actions.resetStart.type, reset);
 };

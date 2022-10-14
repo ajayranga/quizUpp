@@ -32,7 +32,6 @@ const uploadImageSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
-    resetStart(state, action: PayloadAction) {},
     reset(state, action: PayloadAction) {
       state.imageUrl = '';
       state.error = null;

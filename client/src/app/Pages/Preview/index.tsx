@@ -33,6 +33,7 @@ import { UseSubmitQuizSlice } from './Features/SubmitQuiz/slice';
 import { UseCredentialsSlice } from '../Credentials/Features/Credentials/slice';
 import { UseAllResponsesSlice } from '../Quiz/Features/Response/slice';
 import { UseUploadImageSlice } from '../Credentials/Features/UploadImage/slice';
+import { checkMailActions } from '../Credentials/Features/CheckMail/slice';
 
 // import { submitQuiz } from '../actions/quizSubmit';
 // import * as types from '../actionTypes/submitQuiz';
@@ -126,6 +127,7 @@ function Preview() {
         dispatch(responsesActions.reset());
         dispatch(uploadImageActions.reset());
         dispatch(submitQuizActions.reset());
+        dispatch(checkMailActions.reset());
         navigate('/step1');
       }, 4000);
     }

@@ -21,7 +21,7 @@ import {
   selectIsExist as selectCheckMailIsExist,
   selectError as selectCheckMailError,
   selectLoading as selectCheckMailLoading,
-  selectSuccess as selectCheckMailSuccess,
+  // selectSuccess as selectCheckMailSuccess,
 } from './Features/CheckMail/slice/selectors';
 import {
   selectImageUrl as selectUploadImageUrl,
@@ -56,7 +56,7 @@ function Credentials() {
 
   const isExist = useSelector(selectCheckMailIsExist);
   const checkMailLoading = useSelector(selectCheckMailLoading);
-  const checkMailSuccess = useSelector(selectCheckMailSuccess);
+  // const checkMailSuccess = useSelector(selectCheckMailSuccess);
   const checkMailError = useSelector(selectCheckMailError);
 
   const imageUrl = useSelector(selectUploadImageUrl);
@@ -95,14 +95,7 @@ function Credentials() {
       e.stopPropagation();
     }
     setValidated(true);
-    email &&
-      !checkMailSuccess &&
-      dispatch(checkMailActions.checkMailStart(email.trim()));
-    if (
-      validated === true &&
-      form.checkValidity() === true &&
-      isExist === false
-    ) {
+    if (validated === true && isExist === false) {
       dispatch(
         credentialsActions.save({
           name: name.trim(),
@@ -118,7 +111,11 @@ function Credentials() {
       navigate('/step2');
     }
   };
-
+  const checkMailHandler = (e: any) => {
+    if (email.trim() !== '') {
+      dispatch(checkMailActions.checkMailStart(email.trim()));
+    }
+  };
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
@@ -138,7 +135,7 @@ function Credentials() {
         {uploadImageError && (
           <Message
             variant="danger"
-            afterClose={() => dispatch(uploadImageActions.resetStart())}
+            afterClose={() => dispatch(uploadImageActions.reset())}
           >
             {JSON.stringify(error)}
           </Message>
@@ -146,7 +143,7 @@ function Credentials() {
         {checkMailError && (
           <Message
             variant="danger"
-            afterClose={() => dispatch(checkMailActions.resetStart())}
+            afterClose={() => dispatch(checkMailActions.reset())}
           >
             {JSON.stringify(checkMailError)}
           </Message>
@@ -154,7 +151,7 @@ function Credentials() {
         {isExist === true && (
           <Message
             variant="danger"
-            afterClose={() => dispatch(checkMailActions.resetStart())}
+            afterClose={() => dispatch(checkMailActions.reset())}
           >
             Email already exist!!!
           </Message>
@@ -163,8 +160,6 @@ function Credentials() {
       <Container>
         <QuizSteps stepsNum={1} />
         {loading ? (
-          <Loader />
-        ) : checkMailLoading ? (
           <Loader />
         ) : (
           <>
@@ -282,16 +277,23 @@ function Credentials() {
               </Row>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  placeholder="Enter email"
-                />
+                {checkMailLoading ? (
+                  <Loader />
+                ) : (
+                  <Form.Control
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="Enter email"
+                    onBlur={checkMailHandler}
+                    isInvalid={isExist}
+                    isValid={!isExist}
+                  />
+                )}
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
-                  Invalid email!
+                  Invalid email or already used!
                 </Form.Control.Feedback>
                 <Form.Text className="text-muted">
                   We'll never share your email with anyone else.

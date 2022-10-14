@@ -23,11 +23,6 @@ const startUpload = function* (action: PayloadAction<File>) {
   }
 };
 
-const reset = function* (action: PayloadAction) {
-  yield put(actions.reset());
-};
-
 export const UploadImageSaga = function* () {
   yield takeLatest(actions.start.type, startUpload);
-  yield takeLatest(actions.resetStart.type, reset);
 };

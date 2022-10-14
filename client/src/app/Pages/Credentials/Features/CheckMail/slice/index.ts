@@ -32,10 +32,6 @@ const checkMailSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
-    deleteStart(state, action: PayloadAction) {
-      state.loading = true;
-    },
-    resetStart(state, action: PayloadAction) {},
     reset(state, action: PayloadAction) {
       state.isExist = false;
       state.error = null;

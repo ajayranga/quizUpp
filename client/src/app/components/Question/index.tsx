@@ -74,6 +74,7 @@ const Question = ({
             </ListGroup.Item>
           )
         )}
+      <span>{questionData.answer}</span>
     </ListGroup.Item>
   );
 };
