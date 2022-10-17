@@ -3,14 +3,23 @@ import { ListGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { UseAllResponsesSlice } from 'app/Pages/Quiz/Features/Response/slice';
+import { QuestionState } from 'app/Pages/Quiz/Features/Questions/slice/types';
+import { ResponseState } from 'app/Pages/Quiz/Features/Response/slice/types';
 
+type props = {
+  questionData: QuestionState;
+  index: number;
+  response?: ResponseState | {};
+  readOnly?: boolean;
+  adminPreview?: boolean;
+};
 const Question = ({
   questionData,
   index,
   response = {},
   readOnly = false,
   adminPreview = false,
-}: any) => {
+}: props) => {
   const dispatch = useDispatch();
   const { actions } = UseAllResponsesSlice();
 
@@ -20,7 +29,7 @@ const Question = ({
         {index}.{' '}
         <p
           className={`capital-first-letter ms-1 ${
-            adminPreview
+            'answer' in response && adminPreview
               ? questionData.answer === response.answer
                 ? 'text-success'
                 : 'text-danger'
@@ -31,7 +40,8 @@ const Question = ({
         </p>
       </h5>
       {questionData &&
-        questionData.options.map((option: any, index: number) => (
+        'answer' in response &&
+        questionData.options.map((option, index: number) => (
           <ListGroup.Item
             key={index}
             className={`option d-flex 

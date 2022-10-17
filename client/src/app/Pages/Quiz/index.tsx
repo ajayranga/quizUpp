@@ -71,7 +71,7 @@ function Quiz() {
 
   useEffect(() => {
     if (time === 0) navigate('/step3');
-    const timer: any = setInterval(() => {
+    const timer: NodeJS.Timer = setInterval(() => {
       if (time > 0) {
         setCounter(counter - 1);
         dispatch(TimerActions.tick());
@@ -135,7 +135,7 @@ function Quiz() {
             <div className="allQuestionButtonsContainer">
               {allQuestions &&
                 allQuestions.length > 0 &&
-                allQuestions.map((que: QuestionState, index: any) => (
+                allQuestions.map((que: QuestionState, index: number) => (
                   <Button
                     key={index}
                     className={`px-5 m-2`}

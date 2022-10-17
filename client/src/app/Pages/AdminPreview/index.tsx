@@ -7,6 +7,7 @@ import Question from 'app/components/Question/loadable';
 import Meta from 'app/components/Meta';
 import { UseResponseForAdminSlice } from '../AdminAllResponses/Features/ResponsesForAdmin/slice';
 import { selectUserResponses } from '../AdminAllResponses/Features/ResponsesForAdmin/slice/selectors';
+import { ResponseState } from '../Quiz/Features/Response/slice/types';
 
 type Props = {};
 
@@ -23,7 +24,6 @@ const AdminPreview = (props: Props) => {
   useEffect(() => {
     dispatch(actions.fetchUserStart(userId));
   }, [actions, dispatch, userId]);
-  // console.log(userResponses);
   return (
     <Container>
       <Meta
@@ -41,7 +41,7 @@ const AdminPreview = (props: Props) => {
       <Link to="/admin">Go back</Link>
       <ListGroup className="questionsList">
         {questions &&
-          questions.map((question: any, index: number) => (
+          questions.map((question, index: number) => (
             <Question
               questionData={question}
               index={index + 1}
@@ -49,7 +49,7 @@ const AdminPreview = (props: Props) => {
               response={
                 'responses' in userResponses.userResponses &&
                 userResponses.userResponses.responses.find(
-                  (que: any) => que.qId === question._id
+                  (que: ResponseState) => que.qId === question._id
                 )
               }
               readOnly={true}

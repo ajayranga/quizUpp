@@ -181,7 +181,7 @@ function Preview() {
           </TContainer>
           <ListGroup className="questionsList">
             {allQuestions &&
-              allQuestions.map((question: any, index: number) => (
+              allQuestions.map((question, index: number) => (
                 <Question
                   questionData={question}
                   index={index + 1}
@@ -189,7 +189,6 @@ function Preview() {
                   response={allResponses.find(
                     (que) => que.qId === question._id
                   )}
-                  allResponses={allResponses}
                   readOnly={true}
                 />
               ))}

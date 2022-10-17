@@ -1,5 +1,5 @@
 export interface AllResponsesState {
-  responses: any[];
+  responses: ResponseState[];
   loading: boolean;
   error: Error | null;
   success: boolean;

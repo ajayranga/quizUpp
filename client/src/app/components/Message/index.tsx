@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { Toast, ToastContainer } from 'react-bootstrap';
 
-const Message = ({ variant, children, afterClose, status }: any) => {
+type props = {
+  variant: 'danger' | 'success' | 'info';
+  children: string;
+  afterClose?: () => void;
+  status: boolean;
+};
+const Message = ({ variant, children, afterClose, status }: props) => {
   const [show, setShow] = useState(status);
   return (
     <Toast
@@ -11,18 +17,16 @@ const Message = ({ variant, children, afterClose, status }: any) => {
       }}
       bg={variant.toLowerCase()}
       show={show}
-      // delay={3000}
-      // autohide
     >
       <Toast.Header>
         <img
-          src='logo192.png'
-          className='rounded me-2'
-          alt=''
-          height='20'
-          width='20'
+          src="logo192.png"
+          className="rounded me-2"
+          alt=""
+          height="20"
+          width="20"
         />
-        <strong className='me-auto'>Message</strong>
+        <strong className="me-auto">Message</strong>
         <small>Just Now</small>
       </Toast.Header>
       <Toast.Body>{children}</Toast.Body>
@@ -32,10 +36,13 @@ const Message = ({ variant, children, afterClose, status }: any) => {
 
 Message.defaultProps = { varaint: 'info', status: true };
 
-export const TContainer = (props: any) => {
+type props2 = {
+  children: React.ReactNode;
+};
+export const TContainer = ({ children }: props2) => {
   return (
-    <ToastContainer className='p-5' position='top-end' style={{ zIndex: '2' }}>
-      {props.children}
+    <ToastContainer className="p-5" position="top-end" style={{ zIndex: '2' }}>
+      {children}
     </ToastContainer>
   );
 };

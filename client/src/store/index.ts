@@ -7,7 +7,7 @@ import { createReducer } from './reducers';
 const initialState = {};
 const sagaMiddleware = createSagaMiddleware({});
 const { run: runSaga } = sagaMiddleware;
-const middleware: any = [sagaMiddleware];
+const middleware = [sagaMiddleware];
 
 const enhancers = [
   createInjectorsEnhancer({

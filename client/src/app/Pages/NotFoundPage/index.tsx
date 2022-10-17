@@ -1,9 +1,9 @@
-import * as React from "react";
-import styled from "styled-components/macro";
-import { Link } from "react-router-dom";
-import { P } from "./P";
-import NavBar from "../../components/NavBar";
-import { Helmet } from "react-helmet-async";
+import * as React from 'react';
+import styled from 'styled-components/macro';
+import { Link } from 'react-router-dom';
+import { P } from './P';
+import NavBar from '../../components/NavBar';
+import { Helmet } from 'react-helmet-async';
 
 export default function NotFoundPage() {
   return (
@@ -22,7 +22,7 @@ export default function NotFoundPage() {
           4
         </Title>
         <P>Page not found.</P>
-        <Link to={process.env.PUBLIC_URL + "/"}>Return to Home Page</Link>
+        <Link to={process.env.PUBLIC_URL + '/'}>Return to Home Page</Link>
       </Wrapper>
     </>
   );
@@ -40,7 +40,7 @@ const Wrapper = styled.div`
 const Title = styled.div`
   margin-top: -8vh;
   font-weight: bold;
-  color: #000; //${(p: any) => p.theme.text!};
+  color: #000;
   font-size: 3.375rem;
 
   span {

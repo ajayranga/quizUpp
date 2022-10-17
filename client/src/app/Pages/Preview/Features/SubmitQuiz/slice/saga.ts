@@ -18,8 +18,8 @@ const startSubmiting = function* (action: PayloadAction<responseType>) {
     const allResponses: ResponseState[] = yield select(selectAllResponses);
     const allQuestions: QuestionState[] = yield select(selectAllQuestions);
 
-    allResponses.forEach((itm: any) => {
-      allQuestions.forEach((itm2: any) => {
+    allResponses.forEach((itm) => {
+      allQuestions.forEach((itm2) => {
         if (itm.qId === itm2._id && itm.answer === itm2.answer) score++;
       });
     });
