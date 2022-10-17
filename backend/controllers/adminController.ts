@@ -2,7 +2,8 @@ import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 
 import User from '../models/userSchema';
-import Question from '../models/questionSchema';
+import Question, { IQuestion } from '../models/questionSchema';
+import { SortOrder } from 'mongoose';
 
 export const getAllResponses = asyncHandler(
   async (req: Request, res: Response) => {
@@ -10,9 +11,9 @@ export const getAllResponses = asyncHandler(
       const pageNumber = Number(req.query.pageNumber);
       const pageSize = Number(req.query.pageSize);
       const sortField = req.query.sortField ? req.query.sortField : '_id';
-      const dir = req.query.dir;
-      const sort: any = {};
-      sort['' + sortField] = dir === 'asc' ? 1 : -1;
+      const dir = req.query.dir === 'asc' ? 'asc' : 'desc';
+      const sort: { [key: string]: SortOrder } = {};
+      sort['' + sortField] = dir ? dir : 'desc';
       const allResponses = await User.find()
         .sort(sort)
         .limit(pageSize)
@@ -36,7 +37,7 @@ export const getAllResponses = asyncHandler(
 export const getUserResponses = asyncHandler(async (req, res) => {
   try {
     const { userId } = req.params;
-    const questions: any[] = [];
+    const questions: IQuestion[] = [];
     const userResponses = await User.findById(userId);
     var resp =
       userResponses &&
@@ -45,7 +46,7 @@ export const getUserResponses = asyncHandler(async (req, res) => {
         ? userResponses.responses
         : [];
     for (var i = 0; i < resp.length; i++) {
-      var que: any = await Question.findById(resp[i].qId);
+      var que: IQuestion | null = await Question.findById(resp[i].qId);
       if (que !== null) questions.push(que);
     }
 

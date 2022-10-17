@@ -1,5 +1,13 @@
 import mongoose from 'mongoose';
 
+export interface IQuestion extends mongoose.Document {
+  statement: string;
+  answer: string;
+  explanation: string;
+  options: { value: string; text: string }[];
+  createdAt?: string;
+  updatedAt?: string;
+}
 const questionSchema = new mongoose.Schema(
   {
     statement: {
@@ -41,7 +49,6 @@ const questionSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
-
 const Question = mongoose.model('question', questionSchema);
 
 export default Question;

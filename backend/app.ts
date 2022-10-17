@@ -13,7 +13,7 @@ import adminRoutes from './routes/adminRoutes';
 
 const limiter = expressRateLimit({ windowMs: 3 * 60 * 1000, max: 50 });
 
-const app = express();
+const app: Express = express();
 app.use(cors());
 app.use(logger('dev'));
 app.use(limiter);

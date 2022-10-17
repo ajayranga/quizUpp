@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-interface IUser {
+export interface IUser extends mongoose.Document {
   name: string;
   dob: string;
   fatherName: string;
@@ -61,16 +61,6 @@ const UserSchema = new mongoose.Schema<IUser>(
       lowercase: true,
       unique: true,
       required: [true, 'Email is required'],
-      // validate: {
-      //   validator: async function (email: string,this:any``) {
-      //     const user = await UserSchema.findOne({ email });
-      //     if (user) {
-      //       return false;
-      //     }
-      //     return true;
-      //   },
-      //   message: (props) => 'The specified email address is already in use.',
-      // },
     },
     image: {
       type: String,
@@ -93,17 +83,6 @@ const UserSchema = new mongoose.Schema<IUser>(
     toObject: { virtuals: true },
   }
 );
-// UserSchema.post('validate', function (error: any, doc: any, next: any) {
-//   const { email } = this;
-//   console.log('first');
-//   if (error.name === 'MongoError' && error.code === 11000) {
-//     console.log('22222222');
-//     next(new Error(`${email} is already registered`));
-//   } else {
-//     console.log('3333333333333');
-//     next();
-//   }
-// });
 const User = mongoose.model('user', UserSchema);
 
 export default User;
