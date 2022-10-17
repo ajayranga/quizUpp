@@ -1,14 +1,12 @@
-import React from "react";
-import { Container, Carousel } from "react-bootstrap";
+import React from 'react';
+import { Container, Carousel } from 'react-bootstrap';
 
-import baner1 from "./Assets/baner1.jpeg";
-import baner2 from "./Assets/baner2.jpeg";
-import baner3 from "./Assets/baner3.jpeg";
-import baner4 from "./Assets/baner4.jpeg";
+import baner1 from './Assets/baner1.jpeg';
+import baner2 from './Assets/baner2.jpeg';
+import baner3 from './Assets/baner3.jpeg';
+import baner4 from './Assets/baner4.jpeg';
 
-type Props = {};
-
-function Banner({}: Props) {
+function Banner() {
   return (
     <Container>
       <Carousel>

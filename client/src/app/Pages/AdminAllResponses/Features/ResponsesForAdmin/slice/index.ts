@@ -17,16 +17,22 @@ export const initialState: ResponseForAdminState = {
   pages: 1,
   pageSize: 10,
   pageNumber: 1,
+  totalRecords: 0,
   loading: false,
   error: null,
   success: false,
 };
-
+export interface payloadArgs {
+  pageNumber: number;
+  pageSize?: number;
+  sortField?: string;
+  dir?: 'asc' | 'desc';
+}
 const ResponseForAdminSlice = createSlice({
   name: 'responseForAdmin',
   initialState,
   reducers: {
-    fetchAllStart(state, action: PayloadAction<number>) {
+    fetchAllStart(state, action: PayloadAction<payloadArgs>) {
       state.loading = true;
     },
     fetchAll(state, action: PayloadAction<FetchAllResponseType>) {
@@ -34,6 +40,7 @@ const ResponseForAdminSlice = createSlice({
       state.pages = action.payload.pages;
       state.pageSize = action.payload.pageSize;
       state.pageNumber = action.payload.pageNumber;
+      state.totalRecords = action.payload.totalRecords;
       state.error = null;
       state.loading = false;
     },

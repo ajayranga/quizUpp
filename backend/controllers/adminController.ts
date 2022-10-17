@@ -7,18 +7,23 @@ import Question from '../models/questionSchema';
 export const getAllResponses = asyncHandler(
   async (req: Request, res: Response) => {
     try {
-      const pageSize = 10;
-      const pageNumber = Number(req.query.pageNumber) || 1;
+      const pageNumber = Number(req.query.pageNumber);
+      const pageSize = Number(req.query.pageSize);
+      const sortField = req.query.sortField ? req.query.sortField : '_id';
+      const dir = req.query.dir;
+      const sort: any = {};
+      sort['' + sortField] = dir === 'asc' ? 1 : -1;
       const allResponses = await User.find()
-        .sort({ _id: -1 })
-        .limit(10)
+        .sort(sort)
+        .limit(pageSize)
         .skip(pageSize * (pageNumber - 1));
-      const counts = await User.countDocuments();
+      const totalRecords = await User.countDocuments();
       res.status(200).json({
         allResponses,
-        pages: Math.ceil(counts / pageSize),
+        pages: Math.ceil(totalRecords / pageSize),
         pageSize,
         pageNumber,
+        totalRecords,
       });
     } catch (error: any) {
       console.log(error);
@@ -31,7 +36,7 @@ export const getAllResponses = asyncHandler(
 export const getUserResponses = asyncHandler(async (req, res) => {
   try {
     const { userId } = req.params;
-    const questions = [];
+    const questions: any[] = [];
     const userResponses = await User.findById(userId);
     var resp =
       userResponses &&
@@ -40,8 +45,8 @@ export const getUserResponses = asyncHandler(async (req, res) => {
         ? userResponses.responses
         : [];
     for (var i = 0; i < resp.length; i++) {
-      var que = await Question.findById(resp[i].qId);
-      questions.push(que);
+      var que: any = await Question.findById(resp[i].qId);
+      if (que !== null) questions.push(que);
     }
 
     res.status(200).json({

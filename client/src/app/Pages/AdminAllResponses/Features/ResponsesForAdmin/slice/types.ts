@@ -14,6 +14,7 @@ export interface ResponseForAdminState {
   pages: number;
   pageSize: number;
   pageNumber: number;
+  totalRecords: number;
   loading: boolean;
   error: Error | null;
   success: boolean;
@@ -23,6 +24,7 @@ export interface FetchAllResponseType {
   pages: number;
   pageSize: number;
   pageNumber: number;
+  totalRecords: number;
 }
 export interface FetchUserResponseType {
   userResponses: responseType | {};

@@ -13,12 +13,14 @@ import Quiz from './Pages/Quiz/loadable';
 import Preview from './Pages/Preview/loadable';
 import AdminAllResponses from './Pages/AdminAllResponses/loadable';
 import AdminPreview from './Pages/AdminPreview/loadable';
+import DataTableComp from './Pages/DataTableComp';
 
 function App() {
   return (
     <div className="App">
       <NavBar />
       <Routes>
+        <Route path="test" element={<DataTableComp />} />
         <Route path="step1" element={<Credentials />} />
         <Route path="step2" element={<Quiz />} />
         <Route path="step3" element={<Preview />} />

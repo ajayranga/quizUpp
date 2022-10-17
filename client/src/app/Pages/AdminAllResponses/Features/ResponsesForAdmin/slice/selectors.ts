@@ -26,6 +26,10 @@ export const selectPageNumber = createSelector(
   [selectDomain],
   (responseForAdmin) => responseForAdmin.pageNumber
 );
+export const selectTotalRecords = createSelector(
+  [selectDomain],
+  (responseForAdmin) => responseForAdmin.totalRecords
+);
 export const selectLoading = createSelector(
   [selectDomain],
   (responseForAdmin) => responseForAdmin.loading

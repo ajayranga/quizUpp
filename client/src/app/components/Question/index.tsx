@@ -20,9 +20,11 @@ const Question = ({
         {index}.{' '}
         <p
           className={`capital-first-letter ms-1 ${
-            adminPreview && questionData.answer === response.answer
-              ? 'text-success'
-              : 'text-danger'
+            adminPreview
+              ? questionData.answer === response.answer
+                ? 'text-success'
+                : 'text-danger'
+              : ''
           }`}
         >
           {questionData.statement}
