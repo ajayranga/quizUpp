@@ -47,10 +47,11 @@ const AdminPreview = (props: Props) => {
               index={index + 1}
               key={index}
               response={
-                'responses' in userResponses.userResponses &&
-                userResponses.userResponses.responses.find(
-                  (que: ResponseState) => que.qId === question._id
-                )
+                'responses' in userResponses.userResponses
+                  ? userResponses.userResponses.responses.find(
+                      (que: ResponseState) => que.qId === question._id
+                    )
+                  : { qId: '', answer: '' }
               }
               readOnly={true}
               adminPreview

@@ -21,7 +21,7 @@ import {
   selectIsExist as selectCheckMailIsExist,
   selectError as selectCheckMailError,
   selectLoading as selectCheckMailLoading,
-  // selectSuccess as selectCheckMailSuccess,
+  selectSuccess as selectCheckMailSuccess,
 } from './Features/CheckMail/slice/selectors';
 import {
   selectImageUrl as selectUploadImageUrl,
@@ -56,7 +56,7 @@ function Credentials() {
 
   const isExist = useSelector(selectCheckMailIsExist);
   const checkMailLoading = useSelector(selectCheckMailLoading);
-  // const checkMailSuccess = useSelector(selectCheckMailSuccess);
+  const checkMailSuccess = useSelector(selectCheckMailSuccess);
   const checkMailError = useSelector(selectCheckMailError);
 
   const imageUrl = useSelector(selectUploadImageUrl);
@@ -287,8 +287,8 @@ function Credentials() {
                     required
                     placeholder="Enter email"
                     onBlur={checkMailHandler}
-                    isInvalid={isExist}
-                    isValid={!isExist}
+                    isInvalid={email.trim() !== '' ? isExist : undefined}
+                    isValid={checkMailSuccess ? !isExist : undefined}
                   />
                 )}
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>

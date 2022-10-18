@@ -9,14 +9,14 @@ import { ResponseState } from 'app/Pages/Quiz/Features/Response/slice/types';
 type props = {
   questionData: QuestionState;
   index: number;
-  response?: ResponseState | {};
+  response?: ResponseState;
   readOnly?: boolean;
   adminPreview?: boolean;
 };
 const Question = ({
   questionData,
   index,
-  response = {},
+  response = { qId: '', answer: '' },
   readOnly = false,
   adminPreview = false,
 }: props) => {
@@ -29,7 +29,7 @@ const Question = ({
         {index}.{' '}
         <p
           className={`capital-first-letter ms-1 ${
-            'answer' in response && adminPreview
+            adminPreview
               ? questionData.answer === response.answer
                 ? 'text-success'
                 : 'text-danger'
@@ -40,22 +40,22 @@ const Question = ({
         </p>
       </h5>
       {questionData &&
-        'answer' in response &&
         questionData.options.map((option, index: number) => (
           <ListGroup.Item
             key={index}
             className={`option d-flex 
             ${
-              adminPreview &&
-              option.value === response.answer &&
-              'strikethrough'
+              adminPreview && option.value === response.answer
+                ? 'strikethrough'
+                : ''
             }
             ${
               adminPreview
                 ? option.value === questionData.answer &&
                   'bg-info text-light not-strikethrough'
-                : option.value === response.answer &&
-                  'bg-secondary text-light not-strikethrough'
+                : option.value === response.answer
+                ? 'bg-secondary text-light not-strikethrough'
+                : ''
             }
              ${readOnly === true && 'read-only'}`}
             onClick={() =>
