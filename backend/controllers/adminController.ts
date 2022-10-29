@@ -15,9 +15,9 @@ export const getAllResponses = asyncHandler(
       const sort: { [key: string]: SortOrder } = {};
       sort['' + sortField] = dir ? dir : 'desc';
       const allResponses = await User.find()
-        .sort(sort)
         .limit(pageSize)
-        .skip(pageSize * (pageNumber - 1));
+        .skip(pageSize * (pageNumber - 1))
+        .sort(sort);
       const totalRecords = await User.countDocuments();
       res.status(200).json({
         allResponses,

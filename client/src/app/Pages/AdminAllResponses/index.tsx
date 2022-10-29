@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IoEnterOutline } from 'react-icons/io5';
 import DataTable, {
-  SortOrder,
   TableColumn,
   TableStyles,
 } from 'react-data-table-component';
@@ -141,36 +140,6 @@ const AdminAllResponses = (props: Props) => {
   const totalRecords = useSelector(selectTotalRecords);
   const allResponses = useSelector(selectAllResponses);
 
-  const handleSort = (
-    column: TableColumn<DataRow>,
-    sortDirection: SortOrder
-  ) => {
-    if (
-      column.id === 2 ||
-      column.id === 5 ||
-      column.id === 6 ||
-      column.id === 7
-    ) {
-      const colName =
-        column.id === 2
-          ? 'name'
-          : column.id === 5
-          ? 'email'
-          : column.id === 6
-          ? 'createdAt'
-          : column.id === 7
-          ? 'score'
-          : '';
-      dispatch(
-        ResponseForAdminActions.fetchAllStart({
-          pageNumber,
-          sortField: colName,
-          dir: sortDirection,
-          pageSize: pageSize,
-        })
-      );
-    }
-  };
   const handlePerRowsChange = (PaginationChangeRowsPerPage: number) => {
     dispatch(
       ResponseForAdminActions.fetchAllStart({
@@ -228,7 +197,6 @@ const AdminAllResponses = (props: Props) => {
         paginationTotalRows={totalRecords}
         onChangeRowsPerPage={handlePerRowsChange}
         onChangePage={handlePageChange}
-        onSort={handleSort}
         defaultSortFieldId={1}
         progressPending={pending}
         progressComponent={<Loader />}
@@ -238,73 +206,3 @@ const AdminAllResponses = (props: Props) => {
 };
 
 export default AdminAllResponses;
-
-//  const BootyPagination = ({
-//   rowsPerPage,
-//   rowCount,
-//   onChangePage,
-//   onChangeRowsPerPage, // available but not used here
-//   currentPage,
-// }) => {
-//   const handleBackButtonClick = () => {
-//     onChangePage(currentPage - 1);
-//   };
-
-//   const handleNextButtonClick = () => {
-//     onChangePage(currentPage + 1);
-//   };
-
-//   const handlePageNumber = (e) => {
-//     onChangePage(Number(e.target.value));
-//   };
-
-//   const pages = getNumberOfPages(rowCount, rowsPerPage);
-//   const pageItems = toPages(pages);
-//   const nextDisabled = currentPage === pageItems.length;
-//   const previosDisabled = currentPage === 1;
-
-//   return (
-//     <nav>
-//       <ul className="pagination">
-//         <li className="page-item">
-//           <button
-//             className="page-link"
-//             onClick={handleBackButtonClick}
-//             disabled={previosDisabled}
-//             aria-disabled={previosDisabled}
-//             aria-label="previous page"
-//           >
-//             Previous
-//           </button>
-//         </li>
-//         {pageItems.map((page) => {
-//           const className =
-//             page === currentPage ? 'page-item active' : 'page-item';
-
-//           return (
-//             <li key={page} className={className}>
-//               <button
-//                 className="page-link"
-//                 onClick={handlePageNumber}
-//                 value={page}
-//               >
-//                 {page}
-//               </button>
-//             </li>
-//           );
-//         })}
-//         <li className="page-item">
-//           <button
-//             className="page-link"
-//             onClick={handleNextButtonClick}
-//             disabled={nextDisabled}
-//             aria-disabled={nextDisabled}
-//             aria-label="next page"
-//           >
-//             Next
-//           </button>
-//         </li>
-//       </ul>
-//     </nav>
-//   );
-// };

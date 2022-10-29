@@ -15,7 +15,6 @@ import {
   selectUserInfo,
   selectError,
   selectLoading,
-  // selectSuccess,
 } from './Features/Credentials/slice/selectors';
 import {
   selectIsExist as selectCheckMailIsExist,
@@ -25,7 +24,6 @@ import {
 } from './Features/CheckMail/slice/selectors';
 import {
   selectImageUrl as selectUploadImageUrl,
-  // selectError as selectImageUploadError,
   selectLoading as selectImageUploadLoading,
   selectSuccess as selectImageUploadSuccess,
 } from './Features/UploadImage/slice/selectors';
@@ -48,7 +46,7 @@ function Credentials() {
   const [docType, setDocType] = useState<string>('aadhar');
   const [docNum, setDocNum] = useState<string>('');
   const [image, setImage] = useState<string>('');
-  const [check, setCheck] = useState<boolean>(true);
+  const [check, setCheck] = useState<boolean>(false);
 
   const userInfo = useSelector(selectUserInfo);
   const loading = useSelector(selectLoading);
@@ -81,13 +79,6 @@ function Credentials() {
     if (imageUrl) setImage(imageUrl);
   }, [imageUrl]);
 
-  // interface CustomFormEvent extends React.FormEvent {
-  //   target: {
-  //     form: {
-  //       checkValidity: () => boolean;
-  //     };
-  //   };
-  // }
   const submitHandler = (e: any) => {
     e.preventDefault();
     const form = e.currentTarget!;
@@ -120,11 +111,6 @@ function Credentials() {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
 
-  // interface CustomInputEvent extends HTMLInputElement {
-  //   target: {
-  //     files: File[];
-  //   };
-  // }
   const uploadFileHandler = (e: any) => {
     dispatch(uploadImageActions.start(e.target.files[0]));
   };

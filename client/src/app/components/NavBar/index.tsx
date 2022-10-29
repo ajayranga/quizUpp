@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -15,12 +16,17 @@ const NavBar = () => {
         </Navbar.Brand>
         <Navbar id="responsive-navbar-nav">
           <Nav className="ms-auto">
-            <Link to="/admin">Admin</Link>
+            <StyledLink to="/admin">Admin</StyledLink>
           </Nav>
         </Navbar>
       </Container>
     </Navbar>
   );
 };
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+`;
 
 export default NavBar;
